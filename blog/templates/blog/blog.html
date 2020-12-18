@@ -1,13 +1,14 @@
 
 <!doctype html>
 <html lang="en">
+{% load static %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Album example · Bootstrap</title>
+    <title>My Awesome Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
 
@@ -46,14 +47,14 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light font-italic" style="background-color: #F3C19D">
-          <a class="navbar-brand" href="#">My Awesome Blog</a>
+          <a class="navbar-brand" href="{% url 'home' %}">My Awesome Blog</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-              <a class="nav-link " href="#">About me</a>
-              <a class="nav-link" href="#">Facebook</a>
+              <a class="nav-link " href="{% static 'about me.txt' %}">About me</a>
+              <a class="nav-link" href="https://www.facebook.com/profile.php?id=100042016145790" target="_blank" rel="noopener noreferrer">Facebook</a>
               <a class="nav-link active" href="#">Blog</a>
             </div>
           </div>
@@ -65,33 +66,12 @@
         <h1 class="display-2">Recent posts</h1>
 
         {% for post in posts.all %}
-        <h2 class="pt-4 ">{{ post.title }}</h2>
-        <div class="col-lg-4">
-            <img class='card-img-top'  src="{{ post.image.url }}"/>
-        </div>
-        <p class="card-text">{{ post.text }}</p>
+        <a href="{% url 'post_details' post.id %}"><h2 class="pt-4 ">{{ post.title }}</h2></a>
+        <img class='img-fluid' height="300" width="300"  src="{{ post.image.url }}"/>
+        <p class="card-text">{{ post.get_summary }}</p>
         <p class="card-date">{{ post.date }}</p>
         {% endfor %}
-{#      <div class="album py-5 bg-light">#}
-{#        <div class="container">#}
-{##}
-{#          <div class="row">#}
-{##}
-{#            {% for event in events.all %}#}
-{##}
-{#            <div class="col-md-4">#}
-{#              <div class="card mb-4 shadow-sm">#}
-{#                <img class="card-img-top" src="{{ event.event_image.url }}"/>#}
-{#                <div class="card-body">#}
-{#                  <p class="card-text">{{ event.event_text }}</p>#}
-{##}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
+
 
     </main>
 
